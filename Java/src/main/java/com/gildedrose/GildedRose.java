@@ -10,53 +10,47 @@ class GildedRose {
 
     public void updateQuality() {
         for (int i = 0; i < items.length; i++) {
-            if (items[i].name.equals("Aged Brie") ||
-                    items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                ab_q(i);
-
-            } else if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
-                if (items[i].quality > 0) {
-
-                    t1(i);
-                }
+            if(items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
+                continue;
             }
-
-            if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
-                items[i].sellIn = items[i].sellIn - 1;
-            }
-
-            if (items[i].sellIn < 0) {
-                if (items[i].name.equals("Aged Brie")) {
+            items[i].sellIn = items[i].sellIn - 1;
+            switch (items[i].name) {
+                case "Aged Brie":
                     if (items[i].quality < 50) {
                         t(i);
-                    }
-
-                } else {
-                    if (items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-
-                        items[i].quality = 0;
-                    } else {
-                        if (items[i].quality > 0) {
-                            if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
-                                t1(i);
-                            }
+                        if (items[i].sellIn < 0) {
+                            t(i);
                         }
                     }
-                }
+                    break;
+                case "Backstage passes to a TAFKAL80ETC concert":
+                    if (items[i].sellIn < 0) {
+                        items[i].quality = 0;
+                        break;
+                    }
+                    if (items[i].quality < 50) {
+                        t(i);
+                        if (items[i].sellIn < 6 - 1) {
+                            t(i);
+                        }
+                        if (items[i].sellIn < 11 - 1) {
+                            t(i);
+                        }
+                    }
+                    break;
+                default:
+                    t1(i);
+                    if (items[i].sellIn < 0) {
+                        t1(i);
+                    }
             }
-        }
-    }
+            if (items[i].quality > 50) {
+                items[i].quality = 50;
 
-    private void ab_q(int i) {
-        if (items[i].quality < 50) {
-            t(i);
-            if (items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                if (items[i].sellIn < 6) {
-                    t(i);
-                    t(i);
-                } else if (items[i].sellIn < 11) {
-                    t(i);
-                }
+            }
+            if (items[i].quality < 0) {
+                items[i].quality = 0;
+
             }
         }
     }
