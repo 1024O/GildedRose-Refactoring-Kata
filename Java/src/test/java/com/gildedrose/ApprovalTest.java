@@ -10,7 +10,7 @@ class ApprovalTest {
     public void foo() {
         CombinationApprovals.verifyAllCombinations(
             this::it,
-            new String[]{"Aged Brie", "Backstage passes to a TAFKAL80ETC concert", "Sulfuras, Hand of Ragnaros", "item"},
+            new String[]{"Aged Brie", "Backstage passes to a TAFKAL80ETC concert", "Sulfuras, Hand of Ragnaros", "item", "Conjured"},
             new Integer[]{1,6,8,67,-1},
             new Integer[]{47,67,98,17,-1}
         );
